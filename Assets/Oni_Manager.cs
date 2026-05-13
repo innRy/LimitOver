@@ -12,6 +12,7 @@ public class Oni_Manager : MonoBehaviour
     {
         player = GameObject.Find("ninngen");
         navMeshAgent = GetComponent<NavMeshAgent>();
+        navMeshAgent.speed = 2.0f;
     }
 
     void Update()
