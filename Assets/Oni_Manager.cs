@@ -19,16 +19,4 @@ public class Oni_Manager : MonoBehaviour
     {
         navMeshAgent.destination = player.transform.position;
     }
-
-     void OnCollisionEnter(Collision other)
-    {
-        // プレイヤーに当たったら
-        if (other.gameObject.name == "ninngen")
-        {
-            Debug.Log("Game Over");
-
-            // ゲーム終了
-            Application.Quit();
-        }
-    }
 }
