@@ -43,6 +43,16 @@ public class time : MonoBehaviour
         {
             f_Goal = 1;
             GoalMessage.text = "Goal!";
+            // シーン内にある MazeGenerator スクリプトを探して取得する
+            MazeGenerator mazeGen = FindObjectOfType<MazeGenerator>();
+
+            // もし取得できたら、その座標を利用する
+            if (mazeGen != null)
+            {
+                // 例：このオブジェクト（プレイヤー等）をスタート地点の真上に移動させる
+                transform.position = mazeGen.startWorldPosition;
+            }
+            
         }
     }
 }
