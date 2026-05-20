@@ -25,7 +25,7 @@ public class PlayerScript : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         // ① 触れた相手が「Fragment（かけら）」だった場合
-        if (other.transform.parent != null && other.transform.parent.name == "KeyParent")
+        if (other.CompareTag("Fragment"))//この条件を変えることで鍵のかけらの条件を変えることができる
         {
             fragmentCount++; // かけらの数を1増やす
             Destroy(other.gameObject); // 拾ったかけらを消す
@@ -36,7 +36,7 @@ public class PlayerScript : MonoBehaviour
             Debug.Log("かけらをゲット！ 現在: " + fragmentCount + "個");
 
             // かけらが5個集まり、かつまだ鍵が完成していない場合
-            if (fragmentCount >= 5 && hasKey == false)
+            if (fragmentCount >= 5 && hasKey == false)  //鍵の生成までに必要なかけらの個数を変更できる
             {
                 hasKey = true; // 鍵が完成した状態にする
                 Debug.Log("5つ集まった！鍵が完成した！");
@@ -44,7 +44,7 @@ public class PlayerScript : MonoBehaviour
         }
 
         // ② 触れた相手が「Goal（ゴール）」だった場合
-        if (other.gameObject.name == "Goal")
+        if (other.gameObject.name == "Goal")    //この条件を変えることで触れるオブジェクトを変更できる
         {
             if (hasKey == true)
             {
