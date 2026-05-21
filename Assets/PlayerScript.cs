@@ -8,11 +8,19 @@ public class PlayerScript : MonoBehaviour
     public GameObject goalUI;
     public Text countUI; // ���ǉ��A�F������\������e�L�X�g�����锠
 
+    public Transform spawnPoint;    // 上で作った空のGameObjectをアサイン
+
+
     public int fragmentCount = 0;
     public bool hasKey = false;
 
     void Start()
     {
+        if (spawnPoint != null)
+        {
+            this.transform.position = spawnPoint.position;
+            this.transform.rotation = spawnPoint.rotation;
+        }
         if (goalUI != null)
         {
             goalUI.SetActive(false);
