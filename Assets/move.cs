@@ -4,30 +4,62 @@ using UnityEngine;
 
 public class move : MonoBehaviour
 {
+
+    [SerializeField] private float moveSpeed = 5.0f;
     // Start is called before the first frame update
+
+    private Rigidbody  rb;
+
+    private Animator animator;
+
+    private Vector3 moveDirection;
+
     void Start()
     {
-        Application.targetFrameRate = 60;
+        rb = GetComponent<Rigidbody>();
+
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKey("up"))
+        GetInput();
+        ChangeAnimation();
+    }
+
+    private void FixedUpdate()
+    {
+        Walk();
+    }
+
+    private void GetInput()
+    {
+        float x = Input.GetAxisRaw("Horizontal");
+        float z = Input.GetAxisRaw("Vertical");
+
+        moveDirection = new Vector3(x,0,z).normalized;
+    }
+
+    private void Walk()
+    {
+        rb.velocity = new Vector3(
+        moveDirection.x * moveSpeed,
+        rb.velocity.y,
+        moveDirection.z * moveSpeed
+        );
+    }
+
+    private void ChangeAnimation()
+    {
+        if (moveDirection == new Vector3(0,0,0))
         {
-            transform.position += transform.forward * 0.1f;
+            animator.SetBool("Walk",false);
         }
-        if (Input.GetKey("down"))
+        else 
         {
-            transform.position -= transform.forward * 0.1f;
-        }
-        if (Input.GetKey("right"))
-        {
-            transform.Rotate(0f, 3.0f, 0f);
-        }
-        if (Input.GetKey("left"))
-        {
-            transform.Rotate(0f, -3.0f, 0f);
+            animator.SetBool("Walk",true);
         }
     }
+
 }

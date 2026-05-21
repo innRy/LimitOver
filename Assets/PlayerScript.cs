@@ -10,6 +10,7 @@ public class PlayerScript : MonoBehaviour
 
     public Transform spawnPoint;    // 上で作った空のGameObjectをアサイン
 
+  
 
     public int fragmentCount = 0;
     public bool hasKey = false;
@@ -28,6 +29,7 @@ public class PlayerScript : MonoBehaviour
 
         // ���ǉ��B�F�Q�[���J�n���Ɂu0 / 5�v�ƕ\��������
         UpdateCountUI();
+
     }
 
     void OnTriggerEnter(Collider other)
