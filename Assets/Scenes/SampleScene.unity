@@ -1966,6 +1966,7 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
+<<<<<<< HEAD
 --- !u!43 &521956765
 Mesh:
   m_ObjectHideFlags: 0
@@ -16732,6 +16733,8 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 675695552}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+=======
+>>>>>>> parent of 5229d67 (cha)
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -64264,6 +64267,7 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
+<<<<<<< HEAD
 --- !u!1 &1355248164
 GameObject:
   m_ObjectHideFlags: 0
@@ -76282,11 +76286,14 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+=======
+>>>>>>> parent of 5229d67 (cha)
 --- !u!20 &1447329177 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 4202661489018106283, guid: 5292f11c9b5e6024a86a1172b4f8bec7, type: 3}
   m_PrefabInstance: {fileID: 4202661489708522712}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
 --- !u!1 &1494780237
 GameObject:
   m_ObjectHideFlags: 0
@@ -88138,6 +88145,8 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+=======
+>>>>>>> parent of 5229d67 (cha)
 --- !u!1 &1634318250
 GameObject:
   m_ObjectHideFlags: 0
@@ -89342,6 +89351,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94263f84b884498479117a4194d812ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
 --- !u!114 &2135911502
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -89452,6 +89462,8 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+=======
+>>>>>>> parent of 5229d67 (cha)
 --- !u!1001 &4202661489708522712
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -89469,7 +89481,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4202661490056311010, guid: 5292f11c9b5e6024a86a1172b4f8bec7, type: 3}
       propertyPath: m_LocalPosition.y
+<<<<<<< HEAD
       value: 52.2
+=======
+      value: 2
+>>>>>>> parent of 5229d67 (cha)
       objectReference: {fileID: 0}
     - target: {fileID: 4202661490056311010, guid: 5292f11c9b5e6024a86a1172b4f8bec7, type: 3}
       propertyPath: m_LocalPosition.z
