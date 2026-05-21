@@ -9,23 +9,23 @@ public class Oni_Manager : MonoBehaviour
     private GameObject player;
     private NavMeshAgent navMeshAgent;
 
-    [Header("õ“Gİ’è")]
-    [SerializeField] private float viewDistance = 10.0f; // ‹ŠE‚Ì“Í‚­‹——£
-    [SerializeField] private float viewAngle = 90.0f;    // ‹–ìŠpi‘O•û‚ÌîŒ`‚ÌŠp“xj
-    [SerializeField] private LayerMask obstacleMask;     // •Ç‚È‚Ç‚ÌáŠQ•¨ƒŒƒCƒ„[
+    [Header("ï¿½ï¿½ï¿½Gï¿½İ’ï¿½")]
+    [SerializeField] private float viewDistance = 10.0f; // ï¿½ï¿½ï¿½Eï¿½Ì“Í‚ï¿½ï¿½ï¿½ï¿½ï¿½
+    [SerializeField] private float viewAngle = 90.0f;    // ï¿½ï¿½ï¿½ï¿½pï¿½iï¿½Oï¿½ï¿½ï¿½Ìï¿½`ï¿½ÌŠpï¿½xï¿½j
+    [SerializeField] private LayerMask obstacleMask;     // ï¿½Ç‚È‚Ç‚Ìï¿½Qï¿½ï¿½ï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[
 
-    [Header("œpœjİ’è")]
-    [SerializeField] private float patrolRadius = 15.0f; // ƒ‰ƒ“ƒ_ƒ€ˆÚ“®‚ÌÅ‘å”¼Œa
+    [Header("ï¿½pï¿½jï¿½İ’ï¿½")]
+    [SerializeField] private float patrolRadius = 15.0f; // ï¿½ï¿½ï¿½ï¿½ï¿½_ï¿½ï¿½ï¿½Ú“ï¿½ï¿½ÌÅ‘å”¼ï¿½a
 
-    private bool isChasing = false; // ’ÇÕ’†‚©‚Ç‚¤‚©
+    private bool isChasing = false; // ï¿½ÇÕ’ï¿½ï¿½ï¿½ï¿½Ç‚ï¿½ï¿½ï¿½
 
     void Start()
     {
-        player = GameObject.Find("ninngen");
+        player = GameObject.Find("unitychan");
         navMeshAgent = GetComponent<NavMeshAgent>();
         navMeshAgent.speed = 2.0f;
 
-        // Å‰‚Éƒ‰ƒ“ƒ_ƒ€‚È–Ú“I’n‚ğİ’è
+        // ï¿½Åï¿½ï¿½Éƒï¿½ï¿½ï¿½ï¿½_ï¿½ï¿½ï¿½È–Ú“Iï¿½nï¿½ï¿½İ’ï¿½
         SetRandomDestination();
     }
 
@@ -33,25 +33,25 @@ public class Oni_Manager : MonoBehaviour
     {
         if (player == null) return;
 
-        // ƒvƒŒƒCƒ„[‚ª‹ŠE‚É“ü‚Á‚Ä‚¢‚é‚©ƒ`ƒFƒbƒN
+        // ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½Eï¿½É“ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½é‚©ï¿½`ï¿½Fï¿½bï¿½N
         if (CheckVisualField())
         {
-            // ‹ŠE‚É“ü‚Á‚½‚ç’ÇÕƒ‚[ƒh
+            // ï¿½ï¿½ï¿½Eï¿½É“ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÇÕƒï¿½ï¿½[ï¿½h
             isChasing = true;
             navMeshAgent.destination = player.transform.position;
         }
         else
         {
-            // Œ©¸‚Á‚½A‚Ü‚½‚ÍÅ‰‚©‚çŒ©‚¦‚Ä‚¢‚È‚¢ê‡
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½Ü‚ï¿½ï¿½ÍÅï¿½ï¿½ï¿½ï¿½çŒ©ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½È‚ï¿½ï¿½ê‡
             if (isChasing)
             {
-                // ’ÇÕƒ‚[ƒh‚¾‚Á‚½‚Ì‚ÉŒ©¸‚Á‚½ê‡A‚»‚Ìê‚Åˆê“xœpœjƒ‚[ƒh‚É–ß‚·
+                // ï¿½ÇÕƒï¿½ï¿½[ï¿½hï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì‚ÉŒï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‡ï¿½Aï¿½ï¿½ï¿½Ìï¿½Åˆï¿½xï¿½pï¿½jï¿½ï¿½ï¿½[ï¿½hï¿½É–ß‚ï¿½
                 isChasing = false;
                 SetRandomDestination();
             }
 
-            // œpœj’†A–Ú“I’n‚É‹ß‚Ã‚¢‚½‚çŸ‚Ìƒ‰ƒ“ƒ_ƒ€–Ú“I’n‚ğİ’è
-            // pathPending‚ÍŒo˜HŒvZ’†‚©‚Ç‚¤‚©AremainingDistance‚Í–Ú“I’n‚Ü‚Å‚Ìc‚è‹——£
+            // ï¿½pï¿½jï¿½ï¿½ï¿½Aï¿½Ú“Iï¿½nï¿½É‹ß‚Ã‚ï¿½ï¿½ï¿½ï¿½çŸï¿½Ìƒï¿½ï¿½ï¿½ï¿½_ï¿½ï¿½ï¿½Ú“Iï¿½nï¿½ï¿½İ’ï¿½
+            // pathPendingï¿½ÍŒoï¿½Hï¿½vï¿½Zï¿½ï¿½ï¿½ï¿½ï¿½Ç‚ï¿½ï¿½ï¿½ï¿½AremainingDistanceï¿½Í–Ú“Iï¿½nï¿½Ü‚Å‚Ìcï¿½è‹—ï¿½ï¿½
             if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
             {
                 SetRandomDestination();
@@ -59,47 +59,47 @@ public class Oni_Manager : MonoBehaviour
         }
     }
 
-    // ‹ŠE‚Ì”»’èi‹——£AŠp“xAÕ•Á•¨j
+    // ï¿½ï¿½ï¿½Eï¿½Ì”ï¿½ï¿½ï¿½iï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½pï¿½xï¿½Aï¿½Õ•ï¿½ï¿½ï¿½ï¿½j
     private bool CheckVisualField()
     {
         Vector3 directionToPlayer = player.transform.position - transform.position;
         float distanceToPlayer = directionToPlayer.magnitude;
 
-        // 1. ‹——£‚Ìƒ`ƒFƒbƒN
+        // 1. ï¿½ï¿½ï¿½ï¿½ï¿½Ìƒ`ï¿½Fï¿½bï¿½N
         if (distanceToPlayer > viewDistance) return false;
 
-        // 2. Šp“x‚Ìƒ`ƒFƒbƒNi‹S‚Ì³–ÊƒxƒNƒgƒ‹‚ÆƒvƒŒƒCƒ„[‚Ö‚ÌƒxƒNƒgƒ‹‚Ì‚È‚·Špj
+        // 2. ï¿½pï¿½xï¿½Ìƒ`ï¿½Fï¿½bï¿½Nï¿½iï¿½Sï¿½Ìï¿½ï¿½Êƒxï¿½Nï¿½gï¿½ï¿½ï¿½Æƒvï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½Ö‚Ìƒxï¿½Nï¿½gï¿½ï¿½ï¿½Ì‚È‚ï¿½ï¿½pï¿½j
         float angle = Vector3.Angle(transform.forward, directionToPlayer);
         if (angle > viewAngle / 2.0f) return false;
 
-        // 3. áŠQ•¨i•Çj‚Ìƒ`ƒFƒbƒNiRaycast‚ğ”ò‚Î‚·j
-        // ‹S‚Ì‘«Œ³‚©‚ç‚Å‚Í‚È‚­A­‚µ•‚‚©‚¹‚½ˆÊ’uiVector3.up * 0.5f ‚È‚Çj‚©‚ç”ò‚Î‚·‚ÆˆÀ’è‚µ‚Ü‚·
+        // 3. ï¿½ï¿½Qï¿½ï¿½ï¿½iï¿½Çjï¿½Ìƒ`ï¿½Fï¿½bï¿½Nï¿½iRaycastï¿½ï¿½ï¿½Î‚ï¿½ï¿½j
+        // ï¿½Sï¿½Ì‘ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å‚Í‚È‚ï¿½ï¿½Aï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê’uï¿½iVector3.up * 0.5f ï¿½È‚Çjï¿½ï¿½ï¿½ï¿½ï¿½Î‚ï¿½ï¿½Æˆï¿½ï¿½è‚µï¿½Ü‚ï¿½
         Vector3 rayOrigin = transform.position + Vector3.up * 0.5f;
         Vector3 rayDirection = (player.transform.position + Vector3.up * 0.5f) - rayOrigin;
 
         RaycastHit hit;
         if (Physics.Raycast(rayOrigin, rayDirection, out hit, viewDistance, obstacleMask))
         {
-            // ‚à‚µ‰½‚©‚É“–‚½‚Á‚ÄA‚»‚ê‚ªƒvƒŒƒCƒ„[‚¶‚á‚È‚¯‚ê‚Îu•Ç‚Ì— ‚É‚¢‚év‚Æ”»’è
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É“ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÄAï¿½ï¿½ï¿½ê‚ªï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½È‚ï¿½ï¿½ï¿½Îuï¿½Ç‚Ì—ï¿½ï¿½É‚ï¿½ï¿½ï¿½vï¿½Æ”ï¿½ï¿½ï¿½
             if (hit.collider.gameObject != player)
             {
                 return false;
             }
         }
 
-        // ‚·‚×‚Ä‚ÌğŒ‚ğƒNƒŠƒA‚µ‚½‚çuŒ©‚¦‚Ä‚¢‚év
+        // ï¿½ï¿½ï¿½×‚Ä‚Ìï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½ï¿½ï¿½ï¿½uï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½v
         return true;
     }
 
-    // ƒiƒuƒƒbƒVƒ…ã‚Åƒ‰ƒ“ƒ_ƒ€‚È–Ú“I’n‚ğŒˆ‚ß‚éŠÖ”
+    // ï¿½iï¿½uï¿½ï¿½ï¿½bï¿½Vï¿½ï¿½ï¿½ï¿½Åƒï¿½ï¿½ï¿½ï¿½_ï¿½ï¿½ï¿½È–Ú“Iï¿½nï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½Öï¿½
     private void SetRandomDestination()
     {
-        // ©g‚ÌüˆÍ‚Ìƒ‰ƒ“ƒ_ƒ€‚È•ûŒüE‹——£‚Ì“_‚ğŒvZ
+        // ï¿½ï¿½ï¿½gï¿½Ìï¿½ï¿½Í‚Ìƒï¿½ï¿½ï¿½ï¿½_ï¿½ï¿½ï¿½È•ï¿½ï¿½ï¿½ï¿½Eï¿½ï¿½ï¿½ï¿½ï¿½Ì“_ï¿½ï¿½ï¿½vï¿½Z
         Vector3 randomDirection = Random.insideUnitSphere * patrolRadius;
         randomDirection += transform.position;
 
         NavMeshHit navHit;
-        // ŒvZ‚µ‚½“_‚ª‚¿‚á‚ñ‚Æ•à‚¯‚éêŠiNavMeshãj‚É‚ ‚é‚©Šm”F‚µAˆê”Ô‹ß‚¢•à‚¯‚éêŠ‚ğæ“¾
+        // ï¿½vï¿½Zï¿½ï¿½ï¿½ï¿½ï¿½_ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ•ï¿½ï¿½ï¿½ï¿½ï¿½êŠï¿½iNavMeshï¿½ï¿½jï¿½É‚ï¿½ï¿½é‚©ï¿½mï¿½Fï¿½ï¿½ï¿½Aï¿½ï¿½Ô‹ß‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½êŠï¿½ï¿½ï¿½æ“¾
         if (NavMesh.SamplePosition(randomDirection, out navHit, patrolRadius, NavMesh.AllAreas))
         {
             navMeshAgent.destination = navHit.position;
