@@ -3,16 +3,16 @@ using System.Collections.Generic;
 
 public class MazeGenerator : MonoBehaviour
 {
-    [Header("ñ¿òHÇÃê›íË")]
-    [Tooltip("í òHÇÃêîÅB16Ç…ê›íËÇ∑ÇÈÇ∆1ï”ÇÃï®óùìIÇ»í∑Ç≥Ç™49Ç…Ç»ÇËÇ‹Ç∑")]
+    [Header("Ëø∑Ë∑Ø„ÅÆË®≠ÂÆö")]
+    [Tooltip("ÈÄöË∑Ø„ÅÆÊï∞„ÄÇ16„Å´Ë®≠ÂÆö„Åô„Çã„Å®1Ëæ∫„ÅÆÁâ©ÁêÜÁöÑ„Å™Èï∑„Åï„ÅØ49„Å´„Å™„Çä„Åæ„Åô")]
     public int pathCount = 16;
 
-    [Header("äeóvëfÇÃçÇÇ≥")]
-    public float outerWallHeight = 2f; // äOògÇÃçÇÇ≥
-    public float innerWallHeight = 2f; // ì‡ï«ÇÃçÇÇ≥
-    public float pathHeight = 1f;      // í òHÇÃçÇÇ≥
+    [Header("ÂêÑË¶ÅÁ¥†„ÅÆÈ´ò„Åï")]
+    public float outerWallHeight = 2f; // Â§ñÂ£Å„ÅÆÈ´ò„Åï
+    public float innerWallHeight = 2f; // ÂÜÖÂ£Å„ÅÆÈ´ò„Åï
+    public float pathHeight = 1f;      // ÈÄöË∑Ø„ÅÆÈ´ò„Åï
 
-    [Header("éÊìæópç¿ïWÅiëºÇÃÉXÉNÉäÉvÉgÇ©ÇÁéQè∆â¬î\Åj")]
+    [Header("ÂèñÂæóÁî®Ôºà‰ªñ„ÅÆ„Çπ„ÇØ„É™„Éó„Éà„Åã„ÇâÂèÇÁÖßÂèØËÉΩÔºâ")]
     public Vector3 startWorldPosition;
     public Vector3 goalWorldPosition;
 
@@ -35,7 +35,13 @@ public class MazeGenerator : MonoBehaviour
         maze[startPos.x, startPos.y] = 1;
         stack.Push(startPos);
 
-        Vector2Int[] dirs = { new Vector2Int(0, 2), new Vector2Int(0, -2), new Vector2Int(2, 0), new Vector2Int(-2, 0) };
+        Vector2Int[] dirs =
+        {
+            new Vector2Int(0, 2),
+            new Vector2Int(0, -2),
+            new Vector2Int(2, 0),
+            new Vector2Int(-2, 0)
+        };
 
         while (stack.Count > 0)
         {
@@ -47,7 +53,8 @@ public class MazeGenerator : MonoBehaviour
                 int nx = current.x + dir.x;
                 int nz = current.y + dir.y;
 
-                if (nx > 0 && nx < logicalSize - 1 && nz > 0 && nz < logicalSize - 1)
+                if (nx > 0 && nx < logicalSize - 1 &&
+                    nz > 0 && nz < logicalSize - 1)
                 {
                     if (maze[nx, nz] == 0)
                     {
@@ -58,12 +65,21 @@ public class MazeGenerator : MonoBehaviour
 
             if (validDirs.Count > 0)
             {
-                Vector2Int chosenDir = validDirs[UnityEngine.Random.Range(0, validDirs.Count)];
+                Vector2Int chosenDir =
+                    validDirs[UnityEngine.Random.Range(0, validDirs.Count)];
 
-                maze[current.x + chosenDir.x / 2, current.y + chosenDir.y / 2] = 1;
-                maze[current.x + chosenDir.x, current.y + chosenDir.y] = 1;
+                maze[current.x + chosenDir.x / 2,
+                     current.y + chosenDir.y / 2] = 1;
 
-                stack.Push(new Vector2Int(current.x + chosenDir.x, current.y + chosenDir.y));
+                maze[current.x + chosenDir.x,
+                     current.y + chosenDir.y] = 1;
+
+                stack.Push(
+                    new Vector2Int(
+                        current.x + chosenDir.x,
+                        current.y + chosenDir.y
+                    )
+                );
             }
             else
             {
@@ -71,9 +87,10 @@ public class MazeGenerator : MonoBehaviour
             }
         }
 
-        // --- é¿ç€ÇÃUnityãÛä‘Ç÷ÇÃîzíu ---
+        // --- ÂÆüÈöõ„ÅÆUnityÁ©∫Èñì„Å∏„ÅÆÈÖçÁΩÆ ---
         float[] positions = new float[logicalSize];
         float currentPos = 0f;
+
         for (int i = 0; i < logicalSize; i++)
         {
             float size = (i % 2 == 0) ? 1f : 2f;
@@ -90,48 +107,111 @@ public class MazeGenerator : MonoBehaviour
                 float posX = positions[x];
                 float posZ = positions[z];
 
-                if (maze[x, z] == 0) // ï«ÇÃèÍçá
+                if (maze[x, z] == 0) // Â£Å„ÅÆÂ†¥Âêà
                 {
-                    bool isOuter = (x == 0 || x == logicalSize - 1 || z == 0 || z == logicalSize - 1);
-                    float height = isOuter ? outerWallHeight : innerWallHeight;
+                    bool isOuter =
+                        (x == 0 || x == logicalSize - 1 ||
+                         z == 0 || z == logicalSize - 1);
 
-                    GameObject wall = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                    float height =
+                        isOuter ? outerWallHeight : innerWallHeight;
+
+                    GameObject wall =
+                        GameObject.CreatePrimitive(
+                            PrimitiveType.Cube
+                        );
+
                     wall.transform.parent = this.transform;
 
-                    // ï«ÇÕ Y=0 ÇÃínñ Ç©ÇÁÅuè„ÅvÇ…å¸Ç©Ç¡Çƒê∂ê¨
-                    wall.transform.localPosition = new Vector3(posX, height / 2f, posZ);
-                    wall.transform.localScale = new Vector3(sizeX, height, sizeZ);
-                    wall.name = isOuter ? "OuterWall" : "InnerWall";
+                    // Â£Å„ÇíY=0„ÅÆÂú∞Èù¢„Åã„Çâ‰∏äÊñπÂêë„Å´Ë¶ã„Åà„Çã„Çà„ÅÜÈÖçÁΩÆ
+                    wall.transform.localPosition =
+                        new Vector3(
+                            posX,
+                            height / 2f,
+                            posZ
+                        );
 
-                    wall.GetComponent<Renderer>().material.color = isOuter ? Color.black : Color.gray;
+                    wall.transform.localScale =
+                        new Vector3(
+                            sizeX,
+                            height,
+                            sizeZ
+                        );
+
+                    wall.name =
+                        isOuter ? "OuterWall" : "InnerWall";
+
+                    wall.GetComponent<Renderer>()
+                        .material.color =
+                        isOuter ? Color.black : Color.gray;
                 }
-                else // í òHÅEÉXÉ^Å[ÉgÅEÉSÅ[ÉãÇÃèÍçá
+                else // ÈÄöË∑Ø„Éª„Çπ„Çø„Éº„Éà„Éª„Ç¥„Éº„É´„ÅÆÂ†¥Âêà
                 {
-                    GameObject path = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                    GameObject path =
+                        GameObject.CreatePrimitive(
+                            PrimitiveType.Cube
+                        );
+
                     path.transform.parent = this.transform;
 
-                    // í òHÇÕ Y=0 Çï\ñ Ç∆ÇµÇƒÅuâ∫ÅvÇ…å¸Ç©Ç¡Çƒê∂ê¨
-                    path.transform.localPosition = new Vector3(posX, -pathHeight / 2f, posZ);
-                    path.transform.localScale = new Vector3(sizeX, pathHeight, sizeZ);
+                    // ÈÄöË∑Ø„ÇíY=0„ÇíË°®Èù¢„Å®„Åó„Å¶‰∏ãÊñπÂêë„Å´ÈÖçÁΩÆ
+                    path.transform.localPosition =
+                        new Vector3(
+                            posX,
+                            -pathHeight / 2f,
+                            posZ
+                        );
 
-                    if (x == 1 && z == 1) // ñ¿òHÇÃç∂â∫
+                    path.transform.localScale =
+                        new Vector3(
+                            sizeX,
+                            pathHeight,
+                            sizeZ
+                        );
+
+                    if (x == 1 && z == 1) // „Çπ„Çø„Éº„ÉàÂú∞ÁÇπ
                     {
                         path.name = "StartCube";
-                        path.GetComponent<Renderer>().material.color = Color.blue;
+                        path.GetComponent<Renderer>()
+                            .material.color = Color.blue;
 
-                        startWorldPosition = this.transform.TransformPoint(new Vector3(posX, 0f, posZ));
+                        startWorldPosition =
+                            this.transform.TransformPoint(
+                                new Vector3(
+                                    posX,
+                                    0f,
+                                    posZ
+                                )
+                            );
                     }
-                    else if (x == logicalSize - 2 && z == logicalSize - 2) // ñ¿òHÇÃâEè„
+                    else if (
+                        x == logicalSize - 2 &&
+                        z == logicalSize - 2
+                    ) // „Ç¥„Éº„É´Âú∞ÁÇπ
                     {
                         path.name = "GoalCube";
-                        path.GetComponent<Renderer>().material.color = Color.red;
+                        path.GetComponent<Renderer>()
+                            .material.color = Color.red;
 
-                        goalWorldPosition = this.transform.TransformPoint(new Vector3(posX, 0f, posZ));
+                        goalWorldPosition =
+                            this.transform.TransformPoint(
+                                new Vector3(
+                                    posX,
+                                    0f,
+                                    posZ
+                                )
+                            );
                     }
                     else
                     {
                         path.name = "Path";
-                        path.GetComponent<Renderer>().material.color = new Color(0.6f, 0.9f, 0.6f);
+                        path.GetComponent<Renderer>()
+                            .material.color =
+                            new Color(
+                                0.6f,
+                                0.9f,
+                                0.6f
+                            );
                     }
                 }
             }
