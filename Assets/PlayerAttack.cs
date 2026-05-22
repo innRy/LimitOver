@@ -11,6 +11,8 @@ public class PlayerAttack : MonoBehaviour
 
     [SerializeField] private LayerMask enemyLayer;
 
+    [SerializeField] private int damage = 1;
+
     private Animator animator;
     // Start is called before the first frame update
     void Start()
@@ -29,15 +31,21 @@ public class PlayerAttack : MonoBehaviour
 
     public void Onhit()
     {
-        Collider[] hits = Physics.OverlapSphere(
-        attackPoint.position,
-        attackRange,
-        enemyLayer
+        Collider[] hits = Physics.OverlapSphere
+        (
+            attackPoint.position,
+            attackRange,
+            enemyLayer
         );
 
         foreach (var enemy in hits)
         {
-         Destroy(enemy.gameObject);
+            EnemyHP enemyHP = enemy.GetComponent<EnemyHP>();
+
+            if (enemyHP != null)
+            {
+                enemyHP.TakeDamage(damage);
+            }
         }
     }
 }
