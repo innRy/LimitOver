@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI; // ���ǉ��@�FUI�i�e�L�X�g�Ȃǁj�𑀍삷�邽�߂ɐ�΂ɕK�v�I
+using UnityEngine.UI; // ���ǉ��@�FUI�i�e�L�X�g�Ȃǁj�𑀍삷�邽�߂ɐ�΂ɕK�v�I                      // 1. 上部にこれを追加
+using TMPro;
 
 public class PlayerScript : MonoBehaviour
 {
     public GameObject goalUI;
-    public Text countUI; // ���ǉ��A�F������\������e�L�X�g�����锠
+
+// 2. 変数の型を Text から TextMeshProUGUI に変更
+    public TextMeshProUGUI countUI;
 
     public Transform spawnPoint;    // 上で作った空のGameObjectをアサイン
 
@@ -80,7 +83,7 @@ public class PlayerScript : MonoBehaviour
         if (countUI != null)
         {
             // .text ���g���ƁA��ʂ̕��������R�ɕύX�ł��܂�
-            countUI.text = "鍵のかけら: " + fragmentCount + " / 5";
+            countUI.text = "鍵のかけら" + fragmentCount + " / 5";
         }
     }
 }
