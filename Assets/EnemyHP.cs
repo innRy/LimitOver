@@ -2,17 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
-public class PlayerHP : MonoBehaviour
+public class EnemyHP : MonoBehaviour
 {
-    [SerializeField] private int maxHp = 100;
+    [SerializeField] private int maxHp = 3;
     private int hp;
 
     [SerializeField] private Slider hpSlider;
     [SerializeField] private Image fillImage;
-
-    [SerializeField] private GameObject gameOverText; // ← 追加
 
     void Start()
     {
@@ -20,8 +17,6 @@ public class PlayerHP : MonoBehaviour
 
         hpSlider.maxValue = maxHp;
         hpSlider.value = hp;
-
-        gameOverText.SetActive(false); // 最初は非表示
 
         UpdateHPBar();
     }
@@ -34,8 +29,7 @@ public class PlayerHP : MonoBehaviour
         {
             hp = 0;
             UpdateHPBar();
-
-            StartCoroutine(GameOverProcess()); // ← ここ重要
+            Die();
             return;
         }
 
@@ -50,12 +44,8 @@ public class PlayerHP : MonoBehaviour
         fillImage.color = Color.Lerp(Color.red, Color.green, ratio);
     }
 
-    IEnumerator GameOverProcess()
+    void Die()
     {
-        gameOverText.SetActive(true); // 表示
-
-        yield return new WaitForSeconds(2f); // 2秒待つ
-
-        Destroy(gameObject); // プレイヤー消滅
+        Destroy(gameObject);
     }
 }
