@@ -1083,6 +1083,8 @@ MonoBehaviour:
   maxHp: 3
   hpSlider: {fileID: 1446347060}
   fillImage: {fileID: 1202820538}
+  itemPrefab: {fileID: 1909698722169059540, guid: 5b9f5f8e65059c44196bd9c7e79b10ef, type: 3}
+  dropChance: 100
 --- !u!1 &279743156
 GameObject:
   m_ObjectHideFlags: 0
