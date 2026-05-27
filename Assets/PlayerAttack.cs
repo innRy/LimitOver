@@ -46,6 +46,12 @@ public class PlayerAttack : MonoBehaviour
             {
                 enemyHP.TakeDamage(damage);
             }
+
+            BarrelHP barrelHP = enemy.GetComponent<BarrelHP>();
+            if (barrelHP != null)
+            {
+                barrelHP.TakeDamage(damage);
+            }
         }
     }
 }
