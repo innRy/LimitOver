@@ -26963,6 +26963,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 198000010833000056, guid: 29c906b251d80824fbdd6d608384242e, type: 3}
+      propertyPath: looping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198000010833000056, guid: 29c906b251d80824fbdd6d608384242e, type: 3}
       propertyPath: InitialModule.startLifetime.scalar
       value: 7
       objectReference: {fileID: 0}
@@ -26980,7 +26984,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5065669210711558855, guid: 29c906b251d80824fbdd6d608384242e, type: 3}
       propertyPath: looping
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5065669210711558855, guid: 29c906b251d80824fbdd6d608384242e, type: 3}
       propertyPath: InitialModule.startLifetime.scalar
