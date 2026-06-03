@@ -11252,15 +11252,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4306814131670520, guid: 59ccd1309cd2ac94a8700faf3ab6a78d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 72.99918
+      value: 176.5
       objectReference: {fileID: 0}
     - target: {fileID: 4306814131670520, guid: 59ccd1309cd2ac94a8700faf3ab6a78d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 51.5
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4306814131670520, guid: 59ccd1309cd2ac94a8700faf3ab6a78d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 125.00005
+      value: 128.5
       objectReference: {fileID: 0}
     - target: {fileID: 4306814131670520, guid: 59ccd1309cd2ac94a8700faf3ab6a78d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -23862,8 +23862,10 @@ MonoBehaviour:
   - {fileID: 2085056009}
   - {fileID: 511454638}
   - {fileID: 1959706767}
-  - {fileID: 51237849}
   keyIconPrefab: {fileID: 4044722996354991533, guid: 81842dfe5010fe843a85797f6e40ec84, type: 3}
+  enemyTransforms:
+  - {fileID: 204739015}
+  enemyIconPrefab: {fileID: 4228303406486633230, guid: 5683c0e62d5fc4b41b8b9ed8fa80347a, type: 3}
 --- !u!1 &1547299528
 GameObject:
   m_ObjectHideFlags: 0
@@ -26726,7 +26728,6 @@ MonoBehaviour:
   - {fileID: 2085056009}
   - {fileID: 511454638}
   - {fileID: 1959706767}
-  - {fileID: 51237849}
 --- !u!4 &1926369637
 Transform:
   m_ObjectHideFlags: 0
