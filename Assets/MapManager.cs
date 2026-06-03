@@ -32,6 +32,15 @@ public class MapManager : MonoBehaviour
     [Tooltip("プレイヤーの周囲何マス分の霧を晴らすか")]
     [SerializeField] private int revealRadius = 2;
 
+    // ★★★【ここから新規追加】ゴールと鍵のアイコン設定 ★★★
+    [Header("🎯 Goal & Key Icons")]
+    [SerializeField] private Transform goalTransform;      // 3D空間のゴールオブジェクト
+    [SerializeField] private GameObject goalIconPrefab;    // ミニマップ用ゴールアイコンのPrefab（Image等）
+
+    [SerializeField] private Transform[] keyTransforms;    // 3D空間の鍵オブジェクト（インスペクターで5つセットする）
+    [SerializeField] private GameObject keyIconPrefab;     // ミニマップ用鍵アイコンのPrefab（Image等）
+    // ★★★【新規追加ここまで】★★★
+
     private UnityEngine.UI.Image[,] fogGrid;
 
     // 内部計算用のスケール因子（縦横個別）
@@ -66,6 +75,9 @@ public class MapManager : MonoBehaviour
 
         // 2. 【中間】その上からグレーの霧を被せて、壁を隠します
         GenerateFogGrid();
+
+        // ★★★【新規追加】霧の上にゴールと鍵のアイコンを生成・配置します
+        GenerateMapIcons();
 
         // 3. 【最前面】プレイヤーアイコンを一番手前に持ってきます
         if (playerIcon != null)
@@ -215,5 +227,54 @@ public class MapManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    // ★★★【ここから完全新規追加】ゴールと鍵のアイコンを生成する処理 ★★★
+    void GenerateMapIcons()
+    {
+        // 1. ゴールアイコンの配置
+        if (goalTransform != null && goalIconPrefab != null)
+        {
+            InstantiateMapIcon(goalTransform, goalIconPrefab, "GoalIcon_UI");
+        }
+
+        // 2. 鍵アイコンの配置（設定した数だけループ）
+        if (keyTransforms != null && keyIconPrefab != null)
+        {
+            foreach (Transform keyTransform in keyTransforms)
+            {
+                if (keyTransform != null)
+                {
+                    InstantiateMapIcon(keyTransform, keyIconPrefab, "KeyIcon_UI");
+                }
+            }
+        }
+    }
+
+    // アイコンのUIを生成し、壁やプレイヤーと全く同じルールで位置合わせをする関数
+    void InstantiateMapIcon(Transform target3D, GameObject prefab, string objName)
+    {
+        GameObject iconObj = Instantiate(prefab, gridContainer);
+        iconObj.name = objName; // Hierarchyで見分けがつくように名前を変更
+
+        RectTransform rt = iconObj.GetComponent<RectTransform>();
+
+        // ピボットとアンカーの初期化
+        rt.anchorMin = Vector2.zero;
+        rt.anchorMax = Vector2.zero;
+        rt.pivot = new Vector2(0.5f, 0.5f);
+        rt.localScale = Vector3.one;
+
+        // 3D座標の相対位置を取得
+        float relX = target3D.position.x - mazeOrigin.position.x;
+        float relZ = target3D.position.z - mazeOrigin.position.z;
+
+        // ★壁・プレイヤーと全く同じ「入れ替え・反転ルール」を適用
+        float uiX = relZ * scaleFactorX;
+        float uiY = -relX * scaleFactorY;
+        rt.anchoredPosition = new Vector2(uiX, uiY);
+
+        // アイコンの向きも3D空間に合わせる
+        rt.localRotation = Quaternion.Euler(0, 0, -target3D.eulerAngles.y);
     }
 }
