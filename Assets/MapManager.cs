@@ -1,5 +1,4 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class MapManager : MonoBehaviour
@@ -32,13 +31,19 @@ public class MapManager : MonoBehaviour
     [Tooltip("プレイヤーの周囲何マス分の霧を晴らすか")]
     [SerializeField] private int revealRadius = 2;
 
-    // ★★★【ここから新規追加】ゴールと鍵のアイコン設定 ★★★
     [Header("🎯 Goal & Key Icons")]
     [SerializeField] private Transform goalTransform;      // 3D空間のゴールオブジェクト
     [SerializeField] private GameObject goalIconPrefab;    // ミニマップ用ゴールアイコンのPrefab（Image等）
 
     [SerializeField] private Transform[] keyTransforms;    // 3D空間の鍵オブジェクト（インスペクターで5つセットする）
     [SerializeField] private GameObject keyIconPrefab;     // ミニマップ用鍵アイコンのPrefab（Image等）
+
+    // ★★★【新規追加】敵キャラクター用の設定項目 ★★★
+    [Header("👿 Enemy Icons")]
+    [SerializeField] private Transform[] enemyTransforms;  // 3D空間の敵キャラクターたち（複数登録可能）
+    [SerializeField] private GameObject enemyIconPrefab;   // ミニマップ用敵アイコンのPrefab
+
+    private RectTransform[] enemyIcons;                    // 生成した敵UIのRectTransformを記憶する配列
     // ★★★【新規追加ここまで】★★★
 
     private UnityEngine.UI.Image[,] fogGrid;
@@ -76,8 +81,11 @@ public class MapManager : MonoBehaviour
         // 2. 【中間】その上からグレーの霧を被せて、壁を隠します
         GenerateFogGrid();
 
-        // ★★★【新規追加】霧の上にゴールと鍵のアイコンを生成・配置します
+        // 壁・フォグのルールと完全に一致（-relX に修正）
         GenerateMapIcons();
+
+        // ★★★【新規追加】敵キャラクターのアイコンをミニマップ上に生成 ★★★
+        GenerateEnemyIcons();
 
         // 3. 【最前面】プレイヤーアイコンを一番手前に持ってきます
         if (playerIcon != null)
@@ -99,6 +107,9 @@ public class MapManager : MonoBehaviour
 
             // 毎フレームの霧晴らし処理
             UpdateFogVisibility();
+
+            // ★★★【新規追加】敵キャラクターたちの位置と向きをリアルタイム更新 ★★★
+            UpdateEnemyIcons();
         }
     }
 
@@ -229,16 +240,13 @@ public class MapManager : MonoBehaviour
         }
     }
 
-    // ★★★【ここから完全新規追加】ゴールと鍵のアイコンを生成する処理 ★★★
     void GenerateMapIcons()
     {
-        // 1. ゴールアイコンの配置
         if (goalTransform != null && goalIconPrefab != null)
         {
             InstantiateMapIcon(goalTransform, goalIconPrefab, "GoalIcon_UI");
         }
 
-        // 2. 鍵アイコンの配置（設定した数だけループ）
         if (keyTransforms != null && keyIconPrefab != null)
         {
             foreach (Transform keyTransform in keyTransforms)
@@ -251,30 +259,76 @@ public class MapManager : MonoBehaviour
         }
     }
 
-    // アイコンのUIを生成し、壁やプレイヤーと全く同じルールで位置合わせをする関数
     void InstantiateMapIcon(Transform target3D, GameObject prefab, string objName)
     {
         GameObject iconObj = Instantiate(prefab, gridContainer);
-        iconObj.name = objName; // Hierarchyで見分けがつくように名前を変更
+        iconObj.name = objName;
 
         RectTransform rt = iconObj.GetComponent<RectTransform>();
 
-        // ピボットとアンカーの初期化
         rt.anchorMin = Vector2.zero;
         rt.anchorMax = Vector2.zero;
         rt.pivot = new Vector2(0.5f, 0.5f);
         rt.localScale = Vector3.one;
 
-        // 3D座標の相対位置を取得
         float relX = target3D.position.x - mazeOrigin.position.x;
         float relZ = target3D.position.z - mazeOrigin.position.z;
 
-        // ★壁・プレイヤーと全く同じ「入れ替え・反転ルール」を適用
         float uiX = relZ * scaleFactorX;
         float uiY = -relX * scaleFactorY;
         rt.anchoredPosition = new Vector2(uiX, uiY);
 
-        // アイコンの向きも3D空間に合わせる
         rt.localRotation = Quaternion.Euler(0, 0, -target3D.eulerAngles.y);
+    }
+
+    // ★★★【完全新規追加】敵キャラクターのUIアイコンを初期生成する処理 ★★★
+    void GenerateEnemyIcons()
+    {
+        if (enemyTransforms == null || enemyIconPrefab == null) return;
+
+        // 登録された敵の数と同じサイズの配列を用意
+        enemyIcons = new RectTransform[enemyTransforms.Length];
+
+        for (int i = 0; i < enemyTransforms.Length; i++)
+        {
+            if (enemyTransforms[i] == null) continue;
+
+            // 敵アイコンの生成
+            GameObject iconObj = Instantiate(enemyIconPrefab, gridContainer);
+            iconObj.name = $"EnemyIcon_UI_{i}";
+
+            RectTransform rt = iconObj.GetComponent<RectTransform>();
+            rt.anchorMin = Vector2.zero;
+            rt.anchorMax = Vector2.zero;
+            rt.pivot = new Vector2(0.5f, 0.5f);
+            rt.localScale = Vector3.one;
+
+            // 後からUpdateで動かせるように参照を保存
+            enemyIcons[i] = rt;
+        }
+    }
+
+    // ★★★【完全新規追加】敵キャラクターの位置と向きを毎フレーム追従更新する処理 ★★★
+    void UpdateEnemyIcons()
+    {
+        if (enemyTransforms == null || enemyIcons == null) return;
+
+        for (int i = 0; i < enemyTransforms.Length; i++)
+        {
+            // 3Dオブジェクト、またはUIアイコンのどちらかが欠けていたらスキップ
+            if (enemyTransforms[i] == null || enemyIcons[i] == null) continue;
+
+            // 敵キャラクターの現在の3D相対位置を計算
+            float eX = enemyTransforms[i].position.x - mazeOrigin.position.x;
+            float eZ = enemyTransforms[i].position.z - mazeOrigin.position.z;
+
+            // 提示コードのプレイヤー・壁と100%同じ「入れ替え・反転ルール」を適用して配置
+            float enemyUiX = eZ * scaleFactorX;
+            float enemyUiY = -eX * scaleFactorY;
+            enemyIcons[i].anchoredPosition = new Vector2(enemyUiX, enemyUiY);
+
+            // 向き（回転）もプレイヤーと全く同じ符号反転ルールで同期
+            enemyIcons[i].localRotation = Quaternion.Euler(0, 0, -enemyTransforms[i].eulerAngles.y);
+        }
     }
 }
