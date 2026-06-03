@@ -1627,7 +1627,7 @@ MonoBehaviour:
   maxHp: 3
   hpSlider: {fileID: 1446347060}
   fillImage: {fileID: 1202820538}
-  itemPrefab: {fileID: 0}
+  itemPrefab: {fileID: 1909698722169059540, guid: 5b9f5f8e65059c44196bd9c7e79b10ef, type: 3}
   dropChance: 100
 --- !u!1 &279743156
 GameObject:
@@ -3357,7 +3357,7 @@ MonoBehaviour:
   maxHp: 10
   hpSlider: {fileID: 472330471}
   fillImage: {fileID: 972072380}
-  itemPrefab: {fileID: 0}
+  itemPrefab: {fileID: 1909698722169059540, guid: 5b9f5f8e65059c44196bd9c7e79b10ef, type: 3}
   dropChance: 100
 --- !u!114 &687795858
 MonoBehaviour:
@@ -23855,6 +23855,15 @@ MonoBehaviour:
   wallThicknessMultiplier: 1
   fogResolution: 101
   revealRadius: 4
+  goalTransform: {fileID: 862112990}
+  goalIconPrefab: {fileID: 1741608414583926777, guid: f592b29a696986045a377c2fa0938324, type: 3}
+  keyTransforms:
+  - {fileID: 289009996}
+  - {fileID: 2085056009}
+  - {fileID: 511454638}
+  - {fileID: 1959706767}
+  - {fileID: 51237849}
+  keyIconPrefab: {fileID: 4044722996354991533, guid: 81842dfe5010fe843a85797f6e40ec84, type: 3}
 --- !u!1 &1547299528
 GameObject:
   m_ObjectHideFlags: 0
