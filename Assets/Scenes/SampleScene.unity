@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 3
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 353466c49cf019540bf2ac95815b7c1e, type: 2}
+  m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -24073,7 +24073,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1547299528}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 222, y: 3.5, z: 79}
+  m_LocalPosition: {x: 0, y: 800, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -26962,6 +26962,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 198000010833000056, guid: 29c906b251d80824fbdd6d608384242e, type: 3}
+      propertyPath: looping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198000010833000056, guid: 29c906b251d80824fbdd6d608384242e, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 558780335751171626, guid: 29c906b251d80824fbdd6d608384242e, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -26972,7 +26980,15 @@ PrefabInstance:
       objectReference: {fileID: 732131790}
     - target: {fileID: 3984157301794678833, guid: 29c906b251d80824fbdd6d608384242e, type: 3}
       propertyPath: m_VersionIndex
-      value: 745
+      value: 757
+      objectReference: {fileID: 0}
+    - target: {fileID: 5065669210711558855, guid: 29c906b251d80824fbdd6d608384242e, type: 3}
+      propertyPath: looping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5065669210711558855, guid: 29c906b251d80824fbdd6d608384242e, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5986681097188152629, guid: 29c906b251d80824fbdd6d608384242e, type: 3}
       propertyPath: m_Mesh
