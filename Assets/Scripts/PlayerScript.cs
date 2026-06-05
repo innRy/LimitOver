@@ -61,11 +61,12 @@ public class PlayerScript : MonoBehaviour
         {
             if (hasKey == true)
             {
-                Debug.Log("�S�[���I�I");
 
                 if (goalUI != null)
                 {
                     goalUI.SetActive(true);
+                    StartCoroutine(WaitAndProcessCoroutine());
+                    goalUI.SetActive(false);
                 }
             }
             else
@@ -85,5 +86,11 @@ public class PlayerScript : MonoBehaviour
             // .text ���g���ƁA��ʂ̕��������R�ɕύX�ł��܂�
             countUI.text = "鍵のかけら" + fragmentCount + " / 5";
         }
+    }
+    IEnumerator WaitAndProcessCoroutine()
+    {
+        // なにか処理
+        yield return new WaitForSeconds(4f); // ← IEnumerator の中ならエラーにならない！
+        // なにか処理
     }
 }
