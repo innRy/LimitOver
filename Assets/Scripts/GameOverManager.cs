@@ -21,12 +21,9 @@ public class GameOverManager : MonoBehaviour
     public Transform startPosition;
 
     void Start()
-    {        
+    {
         // ボタンにクリック処理を登録
         startButton.onClick.AddListener(OnGameStart);
-        continueYesButton.onClick.AddListener(OnContinueYes);
-        continueNoButton.onClick.AddListener(OnContinueNo);
-        //goalToTitleButton.onClick.AddListener(OnGoalToTitle);
 
         // 起動時はGameStart画面だけ表示
         gameStartPanel.SetActive(true);
