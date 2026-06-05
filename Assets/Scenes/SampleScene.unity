@@ -1551,7 +1551,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fce176751bd94ccb882953c8d417e69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 3
+  maxHp: 15
   hpSlider: {fileID: 1446347060}
   fillImage: {fileID: 1202820538}
   itemPrefab: {fileID: 1909698722169059540, guid: 5b9f5f8e65059c44196bd9c7e79b10ef, type: 3}
@@ -3359,7 +3359,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fce176751bd94ccb882953c8d417e69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 10
+  maxHp: 500
   hpSlider: {fileID: 472330471}
   fillImage: {fileID: 972072380}
   itemPrefab: {fileID: 1909698722169059540, guid: 5b9f5f8e65059c44196bd9c7e79b10ef, type: 3}
@@ -3376,7 +3376,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e2ef93cc6f2a421fad1fce2ae75156e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackPower: 100
+  attackPower: 40
 --- !u!114 &687795859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3416,7 +3416,7 @@ MonoBehaviour:
   firePoint: {fileID: 237371510}
   player: {fileID: 2860176014505032625}
   attackInterval: 1
-  attackRange: 100
+  attackRange: 30
 --- !u!1 &690567130
 GameObject:
   m_ObjectHideFlags: 0
@@ -31030,7 +31030,7 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
-  damage: 1
+  damage: 5
 --- !u!114 &3241098882429116690
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31043,7 +31043,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5954ebd39b3714746b2f945b59f316c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 100
+  maxHp: 1000
   hpSlider: {fileID: 2144658084}
   fillImage: {fileID: 1440063094}
   gameOverText: {fileID: 1299806001}
