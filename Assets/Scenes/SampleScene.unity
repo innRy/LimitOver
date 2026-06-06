@@ -32609,7 +32609,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5954ebd39b3714746b2f945b59f316c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 100
+  maxHp: 500
   hpSlider: {fileID: 2144658084}
   fillImage: {fileID: 1440063094}
   gameOverText: {fileID: 1996876708}

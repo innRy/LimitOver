@@ -46,13 +46,10 @@ public class PlayerScript : MonoBehaviour
             // ���ǉ��C�F��������E�����тɁA��ʂ̐���������������
             UpdateCountUI();
 
-            Debug.Log("��������Q�b�g�I ����: " + fragmentCount + "��");
-
             // �����炪5�W�܂�A���܂������������Ă��Ȃ��ꍇ
             if (fragmentCount >= 5 && hasKey == false)  //���̐����܂łɕK�v�Ȃ�����̌���ύX�ł���
             {
                 hasKey = true; // ��������������Ԃɂ���
-                Debug.Log("5�W�܂����I�������������I");
             }
         }
 
@@ -72,7 +69,6 @@ public class PlayerScript : MonoBehaviour
             else
             {
                 int needCount = 5 - fragmentCount;
-                Debug.Log("�S�[������ɂ͌����K�v���I ���Ƃ����炪 " + needCount + "�� �K�v���I");
             }
         }
     }
