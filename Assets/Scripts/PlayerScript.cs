@@ -87,6 +87,11 @@ public class PlayerScript : MonoBehaviour
     {
         // なにか処理
         yield return new WaitForSeconds(4f); // ← IEnumerator の中ならエラーにならない！
+
+        if (goalUI != null)
+        {
+            goalUI.SetActive(false);
+        }
         // なにか処理
     }
 }
